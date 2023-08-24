@@ -12,14 +12,17 @@ TARGET = build/app.exe
 
 .PHONY: run debug build clean
 
-run: build
+run: $(TARGET)
 	./$(TARGET)
 
-debug:
+debug: $(SOURCE)
 	$(CC) $(CFLAGS) -g $(SOURCE) -o $(TARGET) $(MATH)
 
-build:
+build: $(TARGET)
+
+$(TARGET): $(SOURCE)
 	$(CC) $(CFLAGS) $(SOURCE) -o $(TARGET) $(MATH)
 
 clean:
-	rm build/*.exe
+	rm -f build/*.exe
+

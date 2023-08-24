@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -O3
 DYN = -lncurses
 
-LIFE = game_of_life.c
+LIFE = game_in_life.c
 
 PONG_STATIC = pong.c
 PONG_INTERACTIVE = pong_interactive.c
@@ -22,4 +22,4 @@ pong_interactive:
 	$(CC) $(CFLAGS) $(SOURCE)/pong/$(PONG_INTERACTIVE) $(DYN) -o $(TARGET)/pong/$(PONG_INTERACTIVE:.c=.exe)
 
 clean:
-	rm $(TARGET)/*/*.exe
+	rm -f $(TARGET)/*/*.exe
