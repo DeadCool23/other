@@ -27,7 +27,7 @@ int graph_draw(char graph[][WIDTH], char **polish) {
         if (err) return err;
 
         int screenX = round(x / (4 * M_PI) * (WIDTH - 1));
-        int screenY = round((1 + y) / 2 * (HEIGHT - 1));
+        int screenY = round((1 - y) / 2 * (HEIGHT - 1));
 
         if ((screenX >= 0 && screenX < WIDTH) && (screenY >= 0 && screenY < HEIGHT))
             graph[screenY][screenX] = '*';
