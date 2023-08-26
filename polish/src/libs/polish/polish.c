@@ -188,7 +188,6 @@ double polish_calc(char **polish_not, int *err, double to_x) {
             // If it's binary operator, take two numbers and make operation
             num2 = *(double *)pop(&st, type);
             num1 = *(double *)pop(&st, type);
-            printf("%lf %lf", num1, num2);
             result = count_binary(curr, num1, num2, err);
             push(&st, (void *)&result, type);
         } else {
