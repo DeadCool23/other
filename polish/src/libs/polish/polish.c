@@ -126,13 +126,17 @@ int to_polish_note(char **parse_str, char ***polish) {
             if (st.size == 0) return ERR_SYNTAX;
             pop(&st, type);
         } else if (strcmp(parse_str[i], "-") == 0) {
-            while (st.size != 0 && get_priority(*(char *)peek(&st, type)) >= get_priority('~')) {
-                ALLOCATE_NEW_STR(*polish, SYMB_LEN, polishIndex);
-                (*polish)[polishIndex][0] = *(char *)pop(&st, type);
-                (*polish)[polishIndex][1] = '\0';
-                polishIndex++;
+            if (i == 0 || parse_str[i - 1][0] == '(') {
+                push(&st, (void *)"~", type);
+            } else {
+                while (st.size != 0 && get_priority(*(char *)peek(&st, type)) >= get_priority(parse_str[i][0])) {
+                    ALLOCATE_NEW_STR(*polish, SYMB_LEN, polishIndex);
+                    (*polish)[polishIndex][0] = *(char *)pop(&st, type);
+                    (*polish)[polishIndex][1] = '\0';
+                    polishIndex++;
+                }
+                push(&st, (void *)&parse_str[i][0], type);
             }
-            push(&st, (void *)"~", type);
         } else if (is_operator(parse_str[i][0])) {
             while (st.size != 0 && get_priority(*(char *)peek(&st, type)) >= get_priority(parse_str[i][0])) {
                 ALLOCATE_NEW_STR(*polish, SYMB_LEN, polishIndex);
