@@ -70,7 +70,7 @@ int main(void) {
 int game(int ball_x, int ball_y, int left_score, int right_score, int left_player, int right_player,
          int vec_x, int vec_y) {
     int err = OK;
-    while (1) {
+    for (;;) {
         if (is_win(right_score, left_score)) {
             winner_print(right_score, left_score);
             return WIN;
