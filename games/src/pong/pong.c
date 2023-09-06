@@ -13,6 +13,9 @@
 #define WEIGHT 80
 #define HEIGHT 25
 
+// Максимальное кол-во очков
+#define SCORE 21
+
 // Начальные координаты мяча
 #define BALL_START_X (WEIGHT / 2)
 #define BALL_START_Y (HEIGHT / 2)
@@ -159,7 +162,7 @@ _Bool is_rep(int player_pos, int ball_pos) {
     return (ball_pos == player_pos - 1 || ball_pos == player_pos + 1 || ball_pos == player_pos);
 }
 
-_Bool is_win(int score1, int score2) { return (score1 == 21 || score2 == 21) ? 1 : 0; }
+_Bool is_win(int score1, int score2) { return (score1 == SCORE || score2 == SCORE) ? 1 : 0; }
 
 int check_buf(void) {
     if (getchar() == '\n') return OK;
