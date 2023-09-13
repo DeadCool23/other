@@ -1,9 +1,9 @@
 use rand::Rng;
 use std::{time::Duration, thread::sleep};
 
-pub const SIZE: usize = 60;
+const SIZE: usize = 60;
 
-pub fn print_race_track(x: char, position: usize, size: usize) {
+fn print_race_track(x: char, position: usize, size: usize) {
     print!("|START|");
     for i in 0..size {
         if i == position {
@@ -14,6 +14,7 @@ pub fn print_race_track(x: char, position: usize, size: usize) {
     }
     println!("|FINISH|");
 }
+
 pub fn race(x: char) {
     let mut position = SIZE / 2;
 
