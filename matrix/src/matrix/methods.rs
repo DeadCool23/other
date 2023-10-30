@@ -76,12 +76,17 @@ where
 
     //==========================================================================
     /// #Получение элемента матрицы по индексам
-    pub fn get(&self, row: usize, col: usize) -> Option<T> {
+    pub fn get_el(&self, row: usize, col: usize) -> Option<T> {
         if row < self.rows && col < self.cols {
             Some(self.data[row][col])
         } else {
             None
         }
+    }
+
+    /// # Получение размеров матрицы
+    pub fn get_sizes(&self) -> (usize, usize) {
+        (self.rows, self.cols)
     }
 
     /// # Получение строки по индексу
