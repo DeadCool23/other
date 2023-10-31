@@ -33,7 +33,6 @@ pub fn race(x: char) {
             return;
         }
 
-        // Генерируем случайное число для следующей итерации
         sleep(Duration::from_millis(50));
     }
 }
