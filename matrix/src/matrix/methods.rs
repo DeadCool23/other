@@ -1,5 +1,5 @@
 use super::super::matrix::Matrix;
-use std::{default::Default, fmt::Display, vec};
+use std::{default::Default, fmt::Debug, vec};
 
 impl<T> Matrix<T>
 where
@@ -7,7 +7,7 @@ where
         + std::ops::Mul<Output = T>
         + std::convert::From<i32>
         + Default
-        + Display
+        + Debug
         + Clone
         + Copy,
 {
@@ -333,7 +333,7 @@ where
 
         for i in 0..self.rows {
             for j in 0..self.cols {
-                print!("{} ", self.data[i][j]);
+                print!("{:?} ", self.data[i][j]);
             }
             println!();
         }

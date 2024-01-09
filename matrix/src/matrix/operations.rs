@@ -1,6 +1,6 @@
 use super::super::matrix::Matrix;
 use std::{
-    fmt::Display,
+    fmt::Debug,
     ops::{Add, Mul},
 };
 
@@ -10,7 +10,7 @@ where
         + std::ops::Mul<Output = T>
         + std::convert::From<i32>
         + Default
-        + Display
+        + Debug
         + Clone
         + Copy,
 {
@@ -37,7 +37,7 @@ where
         + std::ops::Mul<Output = T>
         + std::convert::From<i32>
         + Default
-        + Display
+        + Debug
         + Clone
         + Copy,
 {
