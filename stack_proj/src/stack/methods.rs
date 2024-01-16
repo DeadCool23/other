@@ -56,6 +56,7 @@ impl <T: Clone + Debug> Stack<T> {
         }
     }
 
+    #[warn(dead_code)]
     pub fn form(element: T) -> Self {
         Stack {
             element: Some(element),
@@ -80,6 +81,7 @@ impl <T: Clone + Debug> Stack<T> {
         *self = new_stack;
     }
 
+    #[warn(dead_code)]
     pub fn pick(&self) -> Option<T> { self.element.clone() }
 
     pub fn pop(&mut self) -> Option<T> {
@@ -94,6 +96,7 @@ impl <T: Clone + Debug> Stack<T> {
 
     pub fn is_empty(&self) -> bool { self.element.is_none() }
 
+    #[warn(dead_code)]
     pub fn len(&self) -> usize {
         let mut len: usize = 0;
         let mut cur = self;
@@ -107,6 +110,7 @@ impl <T: Clone + Debug> Stack<T> {
         len
     }
 
+    #[warn(dead_code)]
     pub fn each<E: Clone>(&mut self, func: fn(el: T, param: Option<E>) -> T, param: Option<E>) {
         let mut cur = self;
         while let Some(el) = cur.element.as_mut() {
