@@ -61,7 +61,6 @@ fn print_bytes(bytes: &[u8; BYTES_PER_LINE], bytes_cnt: usize) {
 pub fn hex_viewer(file: &mut File) -> Result<(), ()> {
     let mut bytes = [0; BYTES_PER_LINE];
 
-    // Читаем данные из файла в буфер и выводим их в шестнадцатеричном виде
     let mut address = 0;
     horizontal_bord();
     loop {
