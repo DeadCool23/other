@@ -9,23 +9,32 @@ const HORIZONT_SEP: &str = "-";
 const VERTICAL_SEP: &str = "|";
 
 lazy_static! {
-    static ref BYTE_STYLE: Colour = Colour::RGB(0xFF, 0xFF, 0xFF);
-    static ref DECODE_STYLE: Style = Colour::RGB(0xFF, 0xFF, 0xFF).italic();
-    static ref ADRESS_STYLE: Style = Colour::RGB(0xFF, 0xFF, 0xFF).italic();
+    static ref SEP_STYLE: Style = Style::default();
+    static ref BYTE_STYLE: Style = Style::from(Colour::RGB(0xFF, 0xFF, 0xFF));
+    static ref DECODE_STYLE: Style = Style::from(Colour::RGB(0xFF, 0xFF, 0xFF)).italic();
+    static ref ADRESS_STYLE: Style = Style::from(Colour::RGB(0xFF, 0xFF, 0xFF)).italic();
 }
 
 fn horizontal_bord() {
-    println!("{LINK_SEP}{0}{LINK_SEP}{1}{LINK_SEP}{2}{LINK_SEP}", 
-              HORIZONT_SEP.repeat(8), 
-              HORIZONT_SEP.repeat(BYTES_PER_LINE * 3 + 2 * 1), 
-              HORIZONT_SEP.repeat(BYTES_PER_LINE)
-            )
+    println!(
+        "{3}{0}{3}{1}{3}{2}{3}",
+        SEP_STYLE.paint(HORIZONT_SEP.repeat(8)),
+        SEP_STYLE.paint(HORIZONT_SEP.repeat(BYTES_PER_LINE * 3 + 2 * 1)),
+        SEP_STYLE.paint(HORIZONT_SEP.repeat(BYTES_PER_LINE)),
+        SEP_STYLE.paint(LINK_SEP)
+    );
 }
 
-fn print_address(address: usize) { print!{"{VERTICAL_SEP}{}{VERTICAL_SEP} ", ADRESS_STYLE.paint(format!("{:08X}", address))}; }
+fn print_address(address: usize) {
+    print!(
+        "{0}{1}{0} ",
+        SEP_STYLE.paint(VERTICAL_SEP),
+        ADRESS_STYLE.paint(format!("{:08X}", address))
+    );
+}
 
 fn print_bytes_hex(bytes: &[u8; BYTES_PER_LINE], bytes_cnt: usize) {
-    let mut printed = 0; 
+    let mut printed = 0;
     for byte in bytes.iter().take(bytes_cnt) {
         print!("{} ", BYTE_STYLE.paint(format!("{:02X}", byte)));
         printed += 1;
@@ -56,9 +65,9 @@ fn print_bytes_dec(bytes: &[u8; BYTES_PER_LINE], bytes_cnt: usize) {
 
 fn print_bytes(bytes: &[u8; BYTES_PER_LINE], bytes_cnt: usize) {
     print_bytes_hex(bytes, bytes_cnt);
-    print!("{VERTICAL_SEP}");
+    print!("{}", SEP_STYLE.paint(VERTICAL_SEP));
     print_bytes_dec(bytes, bytes_cnt);
-    println!("{VERTICAL_SEP}");
+    println!("{}", SEP_STYLE.paint(VERTICAL_SEP));
 }
 
 pub fn hex_viewer(file: &mut File) -> Result<(), ()> {
@@ -69,9 +78,13 @@ pub fn hex_viewer(file: &mut File) -> Result<(), ()> {
     loop {
         let bytes_read_cnt = match file.read(&mut bytes) {
             Ok(cnt) => cnt,
-            Err(_) => { return Err(()); }
+            Err(_) => {
+                return Err(());
+            }
         };
-        if bytes_read_cnt == 0 { break; }
+        if bytes_read_cnt == 0 {
+            break;
+        }
 
         print_address(address);
         address += bytes_read_cnt;
