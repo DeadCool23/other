@@ -1,5 +1,6 @@
-use ansi_term::Colour;
+use lazy_static::lazy_static;
 use std::{fs::File, io::Read};
+use ansi_term::{Colour, Style};
 
 const BYTES_PER_LINE: usize = 16;
 
@@ -7,9 +8,11 @@ const LINK_SEP: &str = "+";
 const HORIZONT_SEP: &str = "-";
 const VERTICAL_SEP: &str = "|";
 
-const BYTE_CLR: Colour = Colour::RGB(0xFF, 0xFF, 0xFF);
-const DECODE_CLR: Colour = Colour::RGB(0xFF, 0xFF, 0xFF);
-const ADRESS_CLR: Colour = Colour::RGB(0xFF, 0xFF, 0xFF);
+lazy_static! {
+    static ref BYTE_STYLE: Colour = Colour::RGB(0xFF, 0xFF, 0xFF);
+    static ref DECODE_STYLE: Style = Colour::RGB(0xFF, 0xFF, 0xFF).italic();
+    static ref ADRESS_STYLE: Style = Colour::RGB(0xFF, 0xFF, 0xFF).italic();
+}
 
 fn horizontal_bord() {
     println!("{LINK_SEP}{0}{LINK_SEP}{1}{LINK_SEP}{2}{LINK_SEP}", 
@@ -19,12 +22,12 @@ fn horizontal_bord() {
             )
 }
 
-fn print_address(address: usize) { print!{"{VERTICAL_SEP}{}{VERTICAL_SEP} ", ADRESS_CLR.italic().paint(format!("{:08X}", address))}; }
+fn print_address(address: usize) { print!{"{VERTICAL_SEP}{}{VERTICAL_SEP} ", ADRESS_STYLE.paint(format!("{:08X}", address))}; }
 
 fn print_bytes_hex(bytes: &[u8; BYTES_PER_LINE], bytes_cnt: usize) {
     let mut printed = 0; 
     for byte in bytes.iter().take(bytes_cnt) {
-        print!("{} ", BYTE_CLR.paint(format!("{:02X}", byte)));
+        print!("{} ", BYTE_STYLE.paint(format!("{:02X}", byte)));
         printed += 1;
         if printed == BYTES_PER_LINE / 2 {
             print!(" ");
@@ -40,7 +43,7 @@ fn print_bytes_dec(bytes: &[u8; BYTES_PER_LINE], bytes_cnt: usize) {
     for byte in bytes.iter().take(bytes_cnt) {
         let symb = *byte as char;
         if symb.is_ascii_graphic() {
-            print!("{}", DECODE_CLR.italic().paint(symb.to_string()));
+            print!("{}", DECODE_STYLE.paint(symb.to_string()));
         } else {
             print!(".");
         }
