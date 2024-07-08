@@ -7,7 +7,7 @@
 /* Аргументы приложения */
 
 struct Options {
-    bool help;                         // Помощь в использовании
+    bool help = false;                 // Помощь в использовании
     std::optional<std::string> zip;    // Имя архивируемого файла
     std::optional<std::string> name;   // Имя для файла (раз)архивации
     std::optional<std::string> unzip;  // Имя файла разархивации

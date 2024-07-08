@@ -1,7 +1,7 @@
 #include "get_options.hpp"
 
-#include <iostream>
 #include <getopt.h>
+#include <iostream>
 #include <unistd.h>
 
 Options::Options(int argc, char* argv[], int *correct_opts) {

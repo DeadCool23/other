@@ -1,13 +1,14 @@
 #include "unzipper.hpp"
 
-#include "errs.h"
-#include "haffman.hpp"
-
 #include <vector>
+#include <climits>
 #include <cstdint>
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+
+#include "errs.h"
+#include "haffman.hpp"
 
 #if defined(DBG_PRINT)
 #include <bitset>
