@@ -1,7 +1,7 @@
 CC = g++
 
 VALGRIND = valgrind --leak-check=full --quiet
-CPPFLAGS = -Wall -Werror -Wpedantic -Wextra -Wvla -Wfloat-equal -Wfloat-conversion
+CPPFLAGS = -Wall -Werror -Wpedantic -Wextra -Wvla -Wfloat-equal -Wfloat-conversion -std=c++17
 INC = -I inc -I classes
 DYNLIBS = 
 

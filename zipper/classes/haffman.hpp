@@ -33,7 +33,7 @@
 // Создание синонима хранилищу кодов
 #define BITS_STORAGE(code_bits) using Storage = STORAGE_TYPE(code_bits);
 
-BITS_STORAGE(CODE_BITS);
+BITS_STORAGE(CODE_BITS)
 
 /* Дерево Хаффмана */
 
